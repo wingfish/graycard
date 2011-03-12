@@ -6,16 +6,16 @@
 v1.0.1
 
 2011.3.5. add tabview browse + wordpress, copy from Tuan Project
-
+2011.3.12. edit the tableview browse code
 */
 
 
 // data for tableview
 var data = [
 
-	{title:'摄影技巧',font:{fontSize:18,fontWeight:'bold'},leftImage: '../images/tableview/0_00.png'},
-	{title:'后期处理',font:{fontSize:18,fontWeight:'bold'},leftImage: '../images/tableview/0_01.png'},
-	{title:'美图欣赏',font:{fontSize:18,fontWeight:'bold'},leftImage: '../images/tableview/0_02.png'}
+	{title:'摄影技巧',font:{fontSize:18,fontWeight:'bold'},leftImage: '../images/tableview/0_00.png',hasChild:true},
+	{title:'后期处理',font:{fontSize:18,fontWeight:'bold'},leftImage: '../images/tableview/0_01.png',hasChild:true},
+	{title:'美图欣赏',font:{fontSize:18,fontWeight:'bold'},leftImage: '../images/tableview/0_02.png',hasChild:true}
 
 	];
 
@@ -23,7 +23,7 @@ var data = [
 var tableView = Titanium.UI.createTableView({
 	backgroundColor:'transparent',
 	data:data,
-	style:Titanium.UI.iPhone.TableViewStyle.PLAIN,
+//	style:Titanium.UI.iPhone.TableViewStyle.PLAIN,
 	top:10
 });
 
