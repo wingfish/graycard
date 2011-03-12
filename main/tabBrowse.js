@@ -10,26 +10,45 @@ v1.0.1
 */
 
 
+// data for tableview
+var data = [
+
+	{title:'摄影技巧',font:{fontSize:18,fontWeight:'bold'},leftImage: '../images/tableview/0_00.png'},
+	{title:'后期处理',font:{fontSize:18,fontWeight:'bold'},leftImage: '../images/tableview/0_01.png'},
+	{title:'美图欣赏',font:{fontSize:18,fontWeight:'bold'},leftImage: '../images/tableview/0_02.png'}
+
+	];
+
+// tableview object
+var tableView = Titanium.UI.createTableView({
+	backgroundColor:'transparent',
+	data:data,
+	style:Titanium.UI.iPhone.TableViewStyle.PLAIN,
+	top:10
+});
+
+
 // create table view data object
 var data0 = [
 	{title:'摄影技巧', url:'http://mingrihui.com/category/tips/',hasChild:true},
-	{title:'教程心得', url:'http://mingrihui.com/category/study/',hasChild:true},
+	{title:'后期处理', url:'http://mingrihui.com/category/study/',hasChild:true},
 	{title:'美图欣赏', url:'http://mingrihui.com/category/photo/',hasChild:true}
 ];
 
+/*
 var data = [];
 
 for (var c=0;c<3;c++)
 {
 	var row = Ti.UI.createTableViewRow();
-	row.leftImage = '../images/a0'+((c<10)?'0'+c:c)+'/icon.png';
+	row.leftImage = '../images/tabview/0_'+((c<10)?'0'+c:c)+'.png';
 	
 	var label = Ti.UI.createLabel({
 		text: data0[c].title,
 		color: '#420404',
 		textAlign:'left',
-		top:10,
-		left:65,
+		top:12,
+		left:45,
 		width: 'auto',
 		height:'auto',
 		font:{fontWeight:'bold',fontSize:18}
@@ -44,10 +63,11 @@ var tableview = Titanium.UI.createTableView({
 	style:Titanium.UI.iPhone.TableViewStyle.PLAIN,
 	backgroundColor:'transparent'
 });
+*/
 
 
 // create table view event listener
-tableview.addEventListener('click', function(e)
+tableView.addEventListener('click', function(e)
 {
 	var w = Ti.UI.createWindow();
      
@@ -109,9 +129,6 @@ tableview.addEventListener('click', function(e)
 });
 
 // add table view to the window
-Titanium.UI.currentWindow.add(tableview);
+Titanium.UI.currentWindow.add(tableView);
 
-
-// create table view data object
-//var w = Ti.UI.createWindow({title:doctitle});
             

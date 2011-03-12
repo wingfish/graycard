@@ -22,7 +22,7 @@ var tab1 = Titanium.UI.createTab({
 
 var win2 = Titanium.UI.createWindow({  
     url:'main/tabBrowse.js',
-    title:'摄影知识',
+    title:'在线摄影知识',
     backgroundColor:'#fff'
 });
 var tab2 = Titanium.UI.createTab({  
