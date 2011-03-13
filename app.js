@@ -22,12 +22,12 @@ var tab1 = Titanium.UI.createTab({
 
 var win2 = Titanium.UI.createWindow({  
     url:'main/tabBrowse.js',
-    title:'在线摄影知识',
+    title:'摄影宝典',
     backgroundColor:'#fff'
 });
 var tab2 = Titanium.UI.createTab({  
     icon:'images/buttons/bookmark.png',
-    title:'摄影知识',
+    title:'摄影宝典',
     window:win2
 });
 

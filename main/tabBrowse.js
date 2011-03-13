@@ -6,7 +6,8 @@
 v1.0.1
 
 2011.3.5. add tabview browse + wordpress, copy from Tuan Project
-2011.3.12. edit the tableview browse code
+2011.3.12. edit the tableview browser code
+2011.3.13. add internet connection check
 */
 
 
@@ -16,7 +17,6 @@ var data = [
 	{title:'摄影技巧',font:{fontSize:18,fontWeight:'bold'},leftImage: '../images/tableview/0_00.png',hasChild:true},
 	{title:'后期处理',font:{fontSize:18,fontWeight:'bold'},leftImage: '../images/tableview/0_01.png',hasChild:true},
 	{title:'美图欣赏',font:{fontSize:18,fontWeight:'bold'},leftImage: '../images/tableview/0_02.png',hasChild:true}
-
 	];
 
 // tableview object
@@ -35,44 +35,75 @@ var data0 = [
 	{title:'美图欣赏', url:'http://mingrihui.com/category/photo/',hasChild:true}
 ];
 
-/*
-var data = [];
-
-for (var c=0;c<3;c++)
+if (Titanium.Network.online == true)
 {
-	var row = Ti.UI.createTableViewRow();
-	row.leftImage = '../images/tabview/0_'+((c<10)?'0'+c:c)+'.png';
-	
-	var label = Ti.UI.createLabel({
-		text: data0[c].title,
-		color: '#420404',
-		textAlign:'left',
-		top:12,
-		left:45,
-		width: 'auto',
-		height:'auto',
-		font:{fontWeight:'bold',fontSize:18}
-	});
-	row.add(label);
-	
-	data[c]=row;
+	Ti.API.info('online true');
 }
-
-var tableview = Titanium.UI.createTableView({
-	data:data,
-	style:Titanium.UI.iPhone.TableViewStyle.PLAIN,
-	backgroundColor:'transparent'
-});
-*/
+else
+{
+	var alertOnline = Titanium.UI.createAlertDialog({
+		title:'互联网连接状态'
+	//	message:'Hello World'
+	});
+	
+	alertOnline.buttonNames = null; // unset in case you did 2/3rd and then back to 1st
+	alertOnline.message = '没有检查到互联网连接，将影响在线访问';
+	alertOnline.show();
+	
+	}
 
 
 // create table view event listener
 tableView.addEventListener('click', function(e)
 {
 	var w = Ti.UI.createWindow();
-     
-            var webMain = Ti.UI.createWebView({url:data0[e.index].url});
-            w.add(webMain);
+	
+	var webMain = Ti.UI.createWebView({url:data0[e.index].url});
+	w.add(webMain);
+            
+    // test web controls
+	var ButtonBar = Titanium.UI.createButtonBar({
+		labels:['   关 闭   ','   后 退   ', '   刷 新   ', '   前 进   '],
+		backgroundColor:'#003',
+		style:Titanium.UI.iPhone.SystemButtonStyle.BAR
+		});
+			
+	var flexSpace = Titanium.UI.createButton({
+		systemButton:Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE
+		});
+			
+	w.setToolbar([flexSpace,ButtonBar,flexSpace]);
+	
+	ButtonBar.addEventListener('click',function(ce){
+		if (ce.index == 0)
+		{
+			w.close();
+		}
+		if (ce.index == 1)
+		{
+			if (webMain.canGoBack()==true){
+            	webMain.goBack();
+            }
+            else{
+            	w.close();
+            }
+		}
+		else if (ce.index == 2){
+			webMain.reload();
+		}
+		else{
+		if (webMain.canGoForward()==true){
+            webMain.goForward();
+        }
+			}
+	});        
+ 	w.open({modal:true});
+ 	w.hideNavBar();
+           
+            
+            
+            
+        /*    
             
             var btnBack = Titanium.UI.createButton({
 				title:'向前',
@@ -124,7 +155,7 @@ tableView.addEventListener('click', function(e)
             });
             w.open({modal:true});
             w.hideNavBar();
-            
+            */
 	
 });
 
