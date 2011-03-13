@@ -8,6 +8,7 @@ v1.0.1
 2011.3.5. add tabview browse + wordpress, copy from Tuan Project
 2011.3.12. edit the tableview browser code
 2011.3.13. add internet connection check
+2011.3.13. add save picture for browser
 */
 
 
@@ -63,7 +64,7 @@ tableView.addEventListener('click', function(e)
             
     // test web controls
 	var ButtonBar = Titanium.UI.createButtonBar({
-		labels:['   关 闭   ','   后 退   ', '   刷 新   ', '   前 进   '],
+		labels:['   关 闭   ','   后 退   ', '   刷 新   ', '   前 进   ', '   保 存   '],
 		backgroundColor:'#003',
 		style:Titanium.UI.iPhone.SystemButtonStyle.BAR
 		});
@@ -88,78 +89,35 @@ tableView.addEventListener('click', function(e)
             	w.close();
             }
 		}
-		else if (ce.index == 2){
+		if (ce.index == 2)
+		{
 			webMain.reload();
 		}
-		else{
-		if (webMain.canGoForward()==true){
-            webMain.goForward();
+		if (ce.index == 3)
+		{
+			if (webMain.canGoForward()==true){
+            	webMain.goForward();
+        	}
         }
-			}
+        if (ce.index == 4)
+		{
+			var f = webMain.toImage();
+			Titanium.Media.saveToPhotoGallery(f);
+			
+			var alertSaveWeb = Titanium.UI.createAlertDialog({
+				title:'图片保存',
+				message:'当前页面内容已经保存到用户相册。'
+			});
+			alertSaveWeb.show();
+			setTimeout(function()
+			{
+				alertSaveWeb.hide();
+			},2000);
+		}
 	});        
  	w.open({modal:true});
  	w.hideNavBar();
-           
-            
-            
-            
-        /*    
-            
-            var btnBack = Titanium.UI.createButton({
-				title:'向前',
-				style:Titanium.UI.iPhone.SystemButtonStyle.DONE
-			});
-			btnBack.addEventListener('click',function()
-            {
-            	if (webMain.canGoBack()==true){
-            		webMain.goBack();
-            	}
-            });
-
-			var btnForward = Titanium.UI.createButton({
-				title:'向后',
-				style:Titanium.UI.iPhone.SystemButtonStyle.DONE
-			});
-			btnForward.addEventListener('click',function()
-            {
-            	if (webMain.canGoForward()==true){
-            		webMain.goForward();
-            	}
-            });
-			
-			var btnClose = Titanium.UI.createButton({
-				title:'关闭',
-				style:Titanium.UI.iPhone.SystemButtonStyle.DONE
-			});
-			btnClose.addEventListener('click',function()
-            {
-                w.close();
-            });
-            
-			var flexSpace = Titanium.UI.createButton({
-				systemButton:Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE
-			});
-
-	
-			w.setToolbar([btnClose,flexSpace,btnBack,btnForward]);
-            
-            
-            var b = Titanium.UI.createButton({
-                title:'关闭',
-                style:Titanium.UI.iPhone.SystemButtonStyle.PLAIN
-            });
-            w.setLeftNavButton(b);
-            b.addEventListener('click',function()
-            {
-                w.close();
-            });
-            w.open({modal:true});
-            w.hideNavBar();
-            */
-	
 });
-
+       
 // add table view to the window
-Titanium.UI.currentWindow.add(tableView);
-
-            
+Titanium.UI.currentWindow.add(tableView);          
