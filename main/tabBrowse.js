@@ -61,6 +61,12 @@ tableView.addEventListener('click', function(e)
 	
 	var webMain = Ti.UI.createWebView({url:data0[e.index].url});
 	w.add(webMain);
+	
+	var actInd = Titanium.UI.createActivityIndicator({
+    	height: 50,
+    	width: 10
+    });
+	w.add(actInd);
             
     // test web controls
 	var ButtonBar = Titanium.UI.createButtonBar({
@@ -117,7 +123,21 @@ tableView.addEventListener('click', function(e)
 	});        
  	w.open({modal:true});
  	w.hideNavBar();
+ 	
+ 	webMain.addEventListener('beforeload',function(e){
+ 		Ti.API.info('begin to load');	
+ 		actInd.show();
+ 	});
+ 	
+ 	webMain.addEventListener('load',function(e){
+ 		Ti.API.info('load ok');	
+ 		actInd.hide();
+ 	});
+ 	
+ 	
 });
+
+
        
 // add table view to the window
 Titanium.UI.currentWindow.add(tableView);          
