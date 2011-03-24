@@ -17,7 +17,8 @@ var data = [
 
 	{title:'摄影技巧',font:{fontSize:18,fontWeight:'bold'},leftImage: '../images/tableview/0_00.png',hasChild:true},
 	{title:'后期处理',font:{fontSize:18,fontWeight:'bold'},leftImage: '../images/tableview/0_01.png',hasChild:true},
-	{title:'美图欣赏',font:{fontSize:18,fontWeight:'bold'},leftImage: '../images/tableview/0_02.png',hasChild:true}
+	{title:'美图欣赏',font:{fontSize:18,fontWeight:'bold'},leftImage: '../images/tableview/0_02.png',hasChild:true},
+	{title:'导购评测',font:{fontSize:18,fontWeight:'bold'},leftImage: '../images/tableview/0_03.png',hasChild:true}
 	];
 
 // tableview object
@@ -33,7 +34,8 @@ var tableView = Titanium.UI.createTableView({
 var data0 = [
 	{title:'摄影技巧', url:'http://mingrihui.com/category/tips/',hasChild:true},
 	{title:'后期处理', url:'http://mingrihui.com/category/study/',hasChild:true},
-	{title:'美图欣赏', url:'http://mingrihui.com/category/photo/',hasChild:true}
+	{title:'美图欣赏', url:'http://mingrihui.com/category/photo/',hasChild:true},
+	{title:'导购评测', url:'http://mingrihui.com/category/guide/',hasChild:true}
 ];
 
 if (Titanium.Network.online == true)
@@ -64,7 +66,8 @@ tableView.addEventListener('click', function(e)
 	
 	var actInd = Titanium.UI.createActivityIndicator({
     	height: 50,
-    	width: 10
+    	width: 10,
+    	style:Titanium.UI.iPhone.ActivityIndicatorStyle.DARK
     });
 	w.add(actInd);
             
